@@ -1,5 +1,7 @@
 # задание
 TASK = "0,07;  0,052; 0,084;  0,098;  0,079;  0,054;  0,12;  0,09;   0,074; 0,06;  0,082;  0,104;  0,086;  0,065;  0,036;  0,036;  0,087; 0,036;  0,091;  0,045;  0,062;  0,073;  0,094;  0,056;  0,083; 0,115; 0,08; 0,108; 0,068; 0,085"
+#TASK = "0,178; 0,134; 0,202; 0,25; 0,205; 0,147; 0,299; 0,232; 0,192; 0,16;  0,209;  0,258; 0,215; 0,165; 0,117; 0,117; 0,23; 0,193; 0,246; 0,132; 0,173; 0,18; 0,236; 0,158; 0,198; 0,294; 0,196; 0,275; 0,166;  0,213"
+TASK = "1,147; 1,211; 1,088; 1,025; 1,143; 1,2; 0,998; 1,077; 1,145; 1,190; 1,181; 1,136; 1,052; 1,202; 1,108; 1,101; 1,118; 1,025; 1,144; 1,102; 1,122;1,029; 1,092; 1,155; 1,277; 1,123; 1,086; 1,139; 1,081; 1,237"
 
 
 import matplotlib.pyplot as plt
@@ -94,6 +96,13 @@ print("Дискретный интервальный ряд")
 i_discrete_table = AsciiTable([i_discrete_data_str, i_discrete_freq_str], header=False, separateLines=True)
 print(i_discrete_table)
 
+print("[Plot-1]\n")
+plt.plot(i_discrete_data, i_discrete_freq, 'b.-')
+plt.xlabel("xi")
+plt.ylabel("mi")
+plt.grid()
+plt.show()
+
 # дискретный вариационный ряд относительных частот (статистическое распределение)
 w_i_discrete_freq = list(map(Fraction, i_discrete_freq))
 w_i_discrete_freq = [i / len(raw_data) for i in w_i_discrete_freq]
@@ -111,7 +120,7 @@ print("Дискретный интервальный ряд относитель
 w_i_discrete_table = AsciiTable([i_discrete_data_str, w_i_discrete_freq_str], header=False, separateLines=True)
 print(w_i_discrete_table)
 
-print("[Plot-1]\n")
+print("[Plot-2]\n")
 plt.plot(i_discrete_data, w_i_discrete_freq)
 plt.xlabel("xi")
 plt.ylabel("wi")
@@ -128,6 +137,14 @@ hist_intervals_table = AsciiTable(hist_intervals_table, header=True, separateLin
 print(hist_intervals_table)
 
 print("[Hist-1]\n")
+bins = [a for a, b in intervals] + [intervals[-1][-1]]
+hist_weights = [float(h) for x in raw_data]
+plt.hist(x=list(map(float, raw_data)), bins=list(map(float, bins)), weights=hist_weights, histtype='stepfilled')
+plt.ylabel("mi/h")
+plt.grid()
+plt.show()
+
+print("[Hist-2]\n")
 bins = [a for a, b in intervals] + [intervals[-1][-1]]
 plt.hist(x=list(map(float, raw_data)), bins=list(map(float, bins)), histtype='stepfilled', normed=True)
 plt.ylabel("wi/h")
@@ -156,6 +173,27 @@ plt.ylabel("wi нак")
 plt.grid()
 plt.show()
 """
+w_cum_i_discrete_freq = []
+w_cum = 0
+for i in range(5):
+    w_cum_i_discrete_freq.append(w_cum + w_i_discrete_freq[i])
+    w_cum += w_i_discrete_freq[i]
+dec_w_cum_i_discrete_freq = [Decimal(wi.numerator) / Decimal(wi.denominator) for wi in w_cum_i_discrete_freq]
+w_cum_i_discrete_freq_str = ["wi нак"]
+for i, wi_cum in enumerate(w_cum_i_discrete_freq):
+    w_cum_i_discrete_freq_str.append("{} ~ {}".format(wi_cum, round(dec_w_cum_i_discrete_freq[i], 2)))
+
+print("Кумулятивная кривая для дискретного ряда")
+w_cum_i_discrete_table = AsciiTable([i_discrete_data_str, w_cum_i_discrete_freq_str], header=False, separateLines=True)
+print(w_cum_i_discrete_table)
+
+print("[Plot-3]\n")
+plt.plot(i_discrete_data, w_cum_i_discrete_freq)
+plt.plot(i_discrete_data, w_cum_i_discrete_freq, 'ro')
+plt.xlabel("xi")
+plt.ylabel("wi нак")
+plt.grid()
+plt.show()
 
 w_cum_i_discrete_freq = []
 w_cum = 0
@@ -174,7 +212,7 @@ print(w_cum_i_discrete_table)
 
 w_cum_i_discrete_freq = [0] + w_cum_i_discrete_freq
 
-print("[Plot-2]\n")
+print("[Plot-4]\n")
 plt.plot(bins, w_cum_i_discrete_freq)
 plt.plot(bins, w_cum_i_discrete_freq, 'ro')
 plt.xlabel("xi")
