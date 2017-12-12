@@ -1,11 +1,11 @@
 # задание
 TASK = "0,07;  0,052; 0,084;  0,098;  0,079;  0,054;  0,12;  0,09;   0,074; 0,06;  0,082;  0,104;  0,086;  0,065;  0,036;  0,036;  0,087; 0,036;  0,091;  0,045;  0,062;  0,073;  0,094;  0,056;  0,083; 0,115; 0,08; 0,108; 0,068; 0,085"
-#TASK = "0,178; 0,134; 0,202; 0,25; 0,205; 0,147; 0,299; 0,232; 0,192; 0,16;  0,209;  0,258; 0,215; 0,165; 0,117; 0,117; 0,23; 0,193; 0,246; 0,132; 0,173; 0,18; 0,236; 0,158; 0,198; 0,294; 0,196; 0,275; 0,166;  0,213"
+TASK = "0,178; 0,134; 0,202; 0,25; 0,205; 0,147; 0,299; 0,232; 0,192; 0,16;  0,209;  0,258; 0,215; 0,165; 0,117; 0,117; 0,23; 0,193; 0,246; 0,132; 0,173; 0,18; 0,236; 0,158; 0,198; 0,294; 0,196; 0,275; 0,166;  0,213"
 TASK = "1,147; 1,211; 1,088; 1,025; 1,143; 1,2; 0,998; 1,077; 1,145; 1,190; 1,181; 1,136; 1,052; 1,202; 1,108; 1,101; 1,118; 1,025; 1,144; 1,102; 1,122;1,029; 1,092; 1,155; 1,277; 1,123; 1,086; 1,139; 1,081; 1,237"
 
 
-import matplotlib.pyplot as plt
-import numpy as np
+#import matplotlib.pyplot as plt
+# import numpy as np
 from asciitable import AsciiTable
 from collections import Counter
 from fractions import Fraction
@@ -97,11 +97,11 @@ i_discrete_table = AsciiTable([i_discrete_data_str, i_discrete_freq_str], header
 print(i_discrete_table)
 
 print("[Plot-1]\n")
-plt.plot(i_discrete_data, i_discrete_freq, 'b.-')
-plt.xlabel("xi")
-plt.ylabel("mi")
-plt.grid()
-plt.show()
+# plt.plot(i_discrete_data, i_discrete_freq, 'b.-')
+# plt.xlabel("xi")
+# plt.ylabel("mi")
+# plt.grid()
+# plt.show()
 
 # дискретный вариационный ряд относительных частот (статистическое распределение)
 w_i_discrete_freq = list(map(Fraction, i_discrete_freq))
@@ -121,11 +121,11 @@ w_i_discrete_table = AsciiTable([i_discrete_data_str, w_i_discrete_freq_str], he
 print(w_i_discrete_table)
 
 print("[Plot-2]\n")
-plt.plot(i_discrete_data, w_i_discrete_freq)
-plt.xlabel("xi")
-plt.ylabel("wi")
-plt.grid()
-plt.show()
+# plt.plot(i_discrete_data, w_i_discrete_freq)
+# plt.xlabel("xi")
+# plt.ylabel("wi")
+# plt.grid()
+# plt.show()
 
 i_discrete_hist = [round(float(w_i_discrete_freq[i] / Fraction(h)), 3) for i in range(5)]
 
@@ -139,17 +139,17 @@ print(hist_intervals_table)
 print("[Hist-1]\n")
 bins = [a for a, b in intervals] + [intervals[-1][-1]]
 hist_weights = [float(h) for x in raw_data]
-plt.hist(x=list(map(float, raw_data)), bins=list(map(float, bins)), weights=hist_weights, histtype='stepfilled')
-plt.ylabel("mi/h")
-plt.grid()
-plt.show()
+# plt.hist(x=list(map(float, raw_data)), bins=list(map(float, bins)), weights=hist_weights, histtype='stepfilled')
+# plt.ylabel("mi/h")
+# plt.grid()
+# plt.show()
 
 print("[Hist-2]\n")
 bins = [a for a, b in intervals] + [intervals[-1][-1]]
-plt.hist(x=list(map(float, raw_data)), bins=list(map(float, bins)), histtype='stepfilled', normed=True)
-plt.ylabel("wi/h")
-plt.grid()
-plt.show()
+# plt.hist(x=list(map(float, raw_data)), bins=list(map(float, bins)), histtype='stepfilled', normed=True)
+# plt.ylabel("wi/h")
+# plt.grid()
+# plt.show()
 
 """ for discrete
 w_cum_i_discrete_freq = []
@@ -188,12 +188,12 @@ w_cum_i_discrete_table = AsciiTable([i_discrete_data_str, w_cum_i_discrete_freq_
 print(w_cum_i_discrete_table)
 
 print("[Plot-3]\n")
-plt.plot(i_discrete_data, w_cum_i_discrete_freq)
-plt.plot(i_discrete_data, w_cum_i_discrete_freq, 'ro')
-plt.xlabel("xi")
-plt.ylabel("wi нак")
-plt.grid()
-plt.show()
+# plt.plot(i_discrete_data, w_cum_i_discrete_freq)
+# plt.plot(i_discrete_data, w_cum_i_discrete_freq, 'ro')
+# plt.xlabel("xi")
+# plt.ylabel("wi нак")
+# plt.grid()
+# plt.show()
 
 w_cum_i_discrete_freq = []
 w_cum = 0
@@ -213,38 +213,38 @@ print(w_cum_i_discrete_table)
 w_cum_i_discrete_freq = [0] + w_cum_i_discrete_freq
 
 print("[Plot-4]\n")
-plt.plot(bins, w_cum_i_discrete_freq)
-plt.plot(bins, w_cum_i_discrete_freq, 'ro')
-plt.xlabel("xi")
-plt.ylabel("wi нак")
-plt.grid()
-plt.show()
+# plt.plot(bins, w_cum_i_discrete_freq)
+# plt.plot(bins, w_cum_i_discrete_freq, 'ro')
+# plt.xlabel("xi")
+# plt.ylabel("wi нак")
+# plt.grid()
+# plt.show()
 
 print("*************** Характеристики ***************\n")
 
 print("Средняя выборочная")
 print("x- = sum[i = 1..k](xi * mi) / n")
 sum_str = []
-for i in range(len(data)):
-    sum_str.append(str(data[i]) + "*" + str(freq[i]))
+for i in range(len(i_discrete_data)):
+    sum_str.append(str(i_discrete_data[i]) + "*" + str(i_discrete_freq[i]))
 print("x- = (", " + ".join(sum_str), ") /", len(raw_data))
-x_avg = round(sum(raw_data) / len(raw_data), 3)
+x_avg = sum((i_discrete_data[i] * i_discrete_freq[i] for i in range(len(i_discrete_data)))) / len(raw_data)
 print("x- =", x_avg)
 print()
 
 print("Исправленная выборочная дисперсия")
 print("S*^2 = sum[i = 1..k](mi * (xi - x-)^2) / (n - 1)")
 sum_str = []
-for i in range(len(data)):
-    sum_str.append(str(freq[i]) + "*(" + str(data[i]) + "-" + str(x_avg) + ")^2")
+for i in range(len(i_discrete_data)):
+    sum_str.append(str(i_discrete_freq[i]) + "*(" + str(i_discrete_data[i]) + "-" + str(x_avg) + ")^2")
 print("S*^2 = (", " + ".join(sum_str), ") /", len(raw_data) - 1)
-S2 = sum((freq[i] * (data[i] - x_avg) ** 2 for i in range(len(data)))) / (len(raw_data) - 1)
+S2 = sum((i_discrete_freq[i] * (i_discrete_data[i] - x_avg) ** 2 for i in range(len(i_discrete_data)))) / (len(raw_data) - 1)
 print("S*^2 =", S2)
 print()
 
 print("Среднее квадратичное отклонение")
 print("S* = sqrt( S*^2 )")
-S = round(sqrt(S2), 6)
+S = sqrt(S2)
 print("S* = sqrt(", S2, ") =", S)
 print()
 
@@ -256,7 +256,30 @@ print()
 
 print("Коэффициент вариации")
 print("V = (S* / x-) * 100%")
-V = round(S / float(x_avg) * 100, 6)
+V = S / float(x_avg) * 100
 print("V =", "(", S, "/", x_avg, ") * 100% =", str(V) + "%")
 print()
 
+S3 = S ** 3
+print("S*3 =", S3, "\n")
+print("Асимметрия")
+print("As = sum[i = 1..k](mi * (xi - x-)^3) / (S*^3 * n)")
+sum_str = []
+for i in range(len(i_discrete_data)):
+    sum_str.append("(" + str(i_discrete_data[i]) + "-" + str(x_avg) + ")^3 * " + str(i_discrete_freq[i]))
+print("As = (", " + ".join(sum_str), ") / (", S3, " * ", len(raw_data), ")")
+As = sum((((i_discrete_data[i] - x_avg) ** 3) * i_discrete_freq[i] for i in range(len(i_discrete_data)))) / Decimal(S3 * len(raw_data))
+print("As =", As)
+print()
+
+S4 = S ** 4
+print("S*4 =", S4, "\n")
+print("Эксцесс")
+print("Ex = sum[i = 1..k](mi * (xi - x-)^4) / (S*^4 * n) - 3")
+sum_str = []
+for i in range(len(i_discrete_data)):
+    sum_str.append("(" + str(i_discrete_data[i]) + "-" + str(x_avg) + ")^4 * " + str(i_discrete_freq[i]))
+print("As = (", " + ".join(sum_str), ") / (", S4, " * ", len(raw_data), ")")
+Ex = sum((((i_discrete_data[i] - x_avg) ** 4) * i_discrete_freq[i] for i in range(len(i_discrete_data)))) / Decimal(S4 * len(raw_data)) - 3
+print("Ex =", Ex)
+print()
